@@ -2,13 +2,16 @@ FROM centos
 
 RUN yum -y update 
 RUN yum -y install git gcc-c++ glibc-headers openssl-devel readline libyaml-devel readline-devel zlib zlib-devel libffi-devel libxml2 libxslt libxml2-devel libxslt-devel sqlite-devel bzip2 diffutils 
-RUN git clone https://github.com/sstephenson/rbenv.git /usr/local/rbenv 
-RUN cp -p /etc/profile /etc/profile.ORG 
-RUN diff /etc/profile /etc/profile.ORG  
-ENV PATH /usr/local/rbenv/.rbenv/bin:$PATH
-RUN echo 'eval "$(rbenv init -)"' >> /etc/profile 
-RUN source /etc/profile 
-RUN git clone https://github.com/sstephenson/ruby-build.git /usr/local/rbenv/plugins/ruby-build 
+# rbenvのインストール
+RUN git clone https://github.com/sstephenson/rbenv.git /root/.rbenv
+RUN git clone https://github.com/sstephenson/ruby-build.git /root/.rbenv/plugins/ruby-build
+RUN ./root/.rbenv/plugins/ruby-build/install.sh
+ENV PATH /root/.rbenv/bin:$PATH
+RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh
+RUN echo 'eval "$(rbenv init -)"' >> .bashrc
+ 
+# rubyのインストール
+ENV CONFIGURE_OPTS --disable-install-doc
 RUN rbenv install -v 2.4.0 
 RUN rbenv rehash 
 RUN rbenv global 2.4.0 
