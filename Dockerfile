@@ -2,6 +2,7 @@ FROM centos
 
 RUN yum -y update 
 RUN yum -y install git gcc-c++ glibc-headers openssl-devel readline libyaml-devel readline-devel zlib zlib-devel libffi-devel libxml2 libxslt libxml2-devel libxslt-devel sqlite-devel bzip2 diffutils 
+RUN yum -y install autoconf automake cmake freetype-devel gcc libtool make mercurial nasm pkgconfig which 
 # rbenvのインストール
 RUN git clone https://github.com/sstephenson/rbenv.git /root/.rbenv
 RUN git clone https://github.com/sstephenson/ruby-build.git /root/.rbenv/plugins/ruby-build
@@ -17,7 +18,6 @@ RUN rbenv rehash
 RUN rbenv global 2.4.0 
 # FFMPEGインストール
 RUN yum-config-manager --add-repo http://www.nasm.us/nasm.repo 
-RUN yum -y install autoconf automake cmake freetype-devel gcc libtool make mercurial nasm pkgconfig which 
 RUN cd /usr/local/src 
 RUN mkdir ffmpeg_sources 
 RUN cd /usr/local/src/ffmpeg_sources 
