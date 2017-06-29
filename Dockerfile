@@ -90,13 +90,14 @@ RUN yum install -y opus-devel pulseaudio-libs-devel libssh-devel
 RUN yum install -y speex-devel libtheora-devel libvorbis-devel libvpx-devel wavpack-devel 
 WORKDIR /usr/local/src 
 RUN rm -fr sox 
-RUN git clone git://git.code.sf.net/p/sox/code sox 
+RUN git clone git://git.code.sf.net/p/sox/code /usr/local/src/sox 
 WORKDIR sox 
+RUN autoreconf -i
 RUN ./configure 
-RUN make all 
+RUN make -s 
 RUN make install 
+# タイムゾーンの設定
 RUN cp -p /usr/share/zoneinfo/Japan /etc/localtime 
 RUN date 
 RUN echo "LANG=ja_JP.UTF-8" > /etc/sysconfig/i18n 
-
-RUN gem install bundler
+WORKDIR ~/
