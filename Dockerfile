@@ -125,7 +125,7 @@ RUN git clone git://git.code.sf.net/p/sox/code /usr/local/src/sox && \
     autoreconf -i && \
     ./configure  && \
     make -s  &&  make install && \
-    cd /usr/local/src/ && rm -rf cd /usr/local/src/sox
+    cd /usr/local/src/ && rm -rf /usr/local/src/sox
 # タイムゾーンの設定
 RUN cp -p /usr/share/zoneinfo/Japan /etc/localtime && \
     echo "LANG=ja_JP.UTF-8" > /etc/sysconfig/i18n 
