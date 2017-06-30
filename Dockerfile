@@ -66,6 +66,7 @@ ENV CONFIGURE_OPTS --disable-install-doc
 RUN rbenv install -v 2.4.0 
 RUN rbenv rehash 
 RUN rbenv global 2.4.0 
+
 # FFMPEGインストール
 RUN mkdir /usr/local/src/ffmpeg_sources 
 ENV PATH $PATH:/usr/local/bin
@@ -119,16 +120,12 @@ RUN git clone --depth 1 git://github.com/yasm/yasm.git /usr/local/src/ffmpeg_sou
     hash -r && \
     cd /usr/local/src/ && rm -rf cd /usr/local/src/ffmpeg_sources
 # SOXインストール
-WORKDIR /usr/local/src 
-RUN rm -fr sox 
-RUN git clone git://git.code.sf.net/p/sox/code /usr/local/src/sox 
-WORKDIR sox 
-RUN autoreconf -i
-RUN ./configure 
-RUN make -s 
-RUN make install 
+RUN git clone git://git.code.sf.net/p/sox/code /usr/local/src/sox && \
+    cd sox && \
+    autoreconf -i && \
+    ./configure  && \
+    make -s  &&  make install && \
+    cd /usr/local/src/ && rm -rf cd /usr/local/src/sox
 # タイムゾーンの設定
-RUN cp -p /usr/share/zoneinfo/Japan /etc/localtime 
-RUN date 
-RUN echo "LANG=ja_JP.UTF-8" > /etc/sysconfig/i18n 
-WORKDIR ~/
+RUN cp -p /usr/share/zoneinfo/Japan /etc/localtime && \
+    echo "LANG=ja_JP.UTF-8" > /etc/sysconfig/i18n 
