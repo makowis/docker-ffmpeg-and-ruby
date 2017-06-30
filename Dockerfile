@@ -56,7 +56,7 @@ RUN yum -y update && \
 # rbenvのインストール
 RUN git clone https://github.com/sstephenson/rbenv.git /root/.rbenv && \
     git clone https://github.com/sstephenson/ruby-build.git /root/.rbenv/plugins/ruby-build && \
-    ./root/.rbenv/plugins/ruby-build/install.sh && \
+    ./root/.rbenv/plugins/ruby-build/install.sh 
 ENV PATH /root/.rbenv/bin:$PATH
 RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh && \
     echo 'eval "$(rbenv init -)"' >> .bashrc
