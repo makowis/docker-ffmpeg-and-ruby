@@ -54,18 +54,18 @@ RUN yum -y update && \
     wavpack-devel 
 
 # rbenvのインストール
-RUN git clone https://github.com/sstephenson/rbenv.git /root/.rbenv
-RUN git clone https://github.com/sstephenson/ruby-build.git /root/.rbenv/plugins/ruby-build
-RUN ./root/.rbenv/plugins/ruby-build/install.sh
+RUN git clone https://github.com/sstephenson/rbenv.git /root/.rbenv && \
+    git clone https://github.com/sstephenson/ruby-build.git /root/.rbenv/plugins/ruby-build && \
+    ./root/.rbenv/plugins/ruby-build/install.sh && \
 ENV PATH /root/.rbenv/bin:$PATH
-RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh
-RUN echo 'eval "$(rbenv init -)"' >> .bashrc
+RUN echo 'eval "$(rbenv init -)"' >> /etc/profile.d/rbenv.sh && \
+    echo 'eval "$(rbenv init -)"' >> .bashrc
  
 # rubyのインストール
 ENV CONFIGURE_OPTS --disable-install-doc
-RUN rbenv install -v 2.4.0 
-RUN rbenv rehash 
-RUN rbenv global 2.4.0 
+RUN rbenv install -v 2.4.0 && \
+    rbenv rehash && \
+    rbenv global 2.4.0 
 
 # FFMPEGインストール
 RUN mkdir /usr/local/src/ffmpeg_sources 
