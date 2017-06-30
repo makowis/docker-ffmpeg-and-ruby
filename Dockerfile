@@ -31,7 +31,7 @@ RUN git clone --depth 1 git://github.com/yasm/yasm.git /usr/local/src/ffmpeg_sou
     PKG_CONFIG_PATH="/usr/local/ffmpeg_build/lib/pkgconfig" ./configure --prefix="/usr/local/ffmpeg_build" --bindir="/usr/local/bin" --enable-static && \
     make && make install && \
     git clone --depth 1 git://git.code.sf.net/p/opencore-amr/fdk-aac && \
-    cd fdk-aac 
+    cd fdk-aac  && \
     autoreconf -fiv  && \
     ./configure --prefix="/usr/local/ffmpeg_build" --disable-shared  && \
     make  && make install  && \
