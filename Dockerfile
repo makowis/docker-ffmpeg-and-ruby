@@ -1,9 +1,57 @@
 FROM centos
 
-RUN yum -y update 
-RUN yum-config-manager --add-repo http://www.nasm.us/nasm.repo 
-RUN yum -y install git gcc-c++ glibc-headers openssl-devel readline libyaml-devel readline-devel zlib zlib-devel libffi-devel libxml2 libxslt libxml2-devel libxslt-devel sqlite-devel bzip2 diffutils 
-RUN yum -y install autoconf automake cmake freetype-devel gcc libtool make mercurial nasm pkgconfig which 
+RUN yum -y update && \
+    yum-config-manager --add-repo http://www.nasm.us/nasm.repo && \
+    yum -y install 
+    git  \
+    gcc-c++  \
+    gcc \
+    glibc-headers \
+    openssl-devel \
+    readline \
+    libyaml-devel \
+    readline-devel \
+    zlib zlib-devel \
+    libffi-devel \
+    libxml2 \
+    libxslt \
+    libxml2-devel \
+    libxslt-devel \
+    sqlite-devel \
+    bzip2 \
+    diffutils \ 
+    autoconf \
+    automake \
+    cmake \
+    freetype-devel \
+    libtool \
+    make \
+    mercurial \
+    nasm \
+    pkgconfig \
+    which \
+    libmad \
+    libmad-devel \
+    libid3tag  \
+    libid3tag-devel \
+    lame \
+    lame-devel \
+    flac-devel \
+    libpng-devel  \
+    libjpeg-devel \
+    libvorbis-devel \
+    fribidi-devel \
+    libbluray-devel \
+    flite-devel \
+    gsm-devel \
+    openjpeg-devel \
+    opus-devel \
+    pulseaudio-libs-devel \
+    libssh-devel \
+    speex-devel \
+    libtheora-devel \
+    libvpx-devel \
+    wavpack-devel 
 
 # rbenvのインストール
 RUN git clone https://github.com/sstephenson/rbenv.git /root/.rbenv
@@ -71,11 +119,6 @@ RUN git clone --depth 1 git://github.com/yasm/yasm.git /usr/local/src/ffmpeg_sou
     hash -r && \
     cd /usr/local/src/ && rm -rf cd /usr/local/src/ffmpeg_sources
 # SOXインストール
-RUN yum install -y libmad libmad-devel libid3tag libid3tag-devel lame-devel flac-devel libpng-devel libjpeg-devel 
-RUN yum install -y gcc-c++ libmad libmad-devel libid3tag libid3tag-devel lame lame-devel flac-devel libvorbis-devel 
-RUN yum install -y fribidi-devel libbluray-devel flite-devel gsm-devel openjpeg-devel 
-RUN yum install -y opus-devel pulseaudio-libs-devel libssh-devel 
-RUN yum install -y speex-devel libtheora-devel libvorbis-devel libvpx-devel wavpack-devel 
 WORKDIR /usr/local/src 
 RUN rm -fr sox 
 RUN git clone git://git.code.sf.net/p/sox/code /usr/local/src/sox 
