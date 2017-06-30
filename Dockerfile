@@ -118,10 +118,10 @@ RUN git clone --depth 1 git://github.com/yasm/yasm.git /usr/local/src/ffmpeg_sou
     PKG_CONFIG_PATH="/usr/local/ffmpeg_build/lib/pkgconfig" ./configure --prefix="/usr/local/ffmpeg_build" --extra-cflags="-I/usr/local/ffmpeg_build/include" --extra-ldflags="-L/usr/local/ffmpeg_build/lib -ldl" --bindir="/usr/local/bin" --pkg-config-flags="--static" --enable-gpl --enable-nonfree --enable-libfdk_aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libvpx --enable-libx264 && \
     make && make install && \
     hash -r && \
-    cd /usr/local/src/ && rm -rf cd /usr/local/src/ffmpeg_sources
+    cd /usr/local/src/ && rm -rf /usr/local/src/ffmpeg_sources
 # SOXインストール
 RUN git clone git://git.code.sf.net/p/sox/code /usr/local/src/sox && \
-    cd sox && \
+    cd /usr/local/src/sox && \
     autoreconf -i && \
     ./configure  && \
     make -s  &&  make install && \
