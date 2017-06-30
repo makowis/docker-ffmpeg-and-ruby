@@ -2,7 +2,7 @@ FROM centos
 
 RUN yum -y update && \
     yum-config-manager --add-repo http://www.nasm.us/nasm.repo && \
-    yum -y install 
+    yum -y install \
     git  \
     gcc-c++  \
     gcc \
